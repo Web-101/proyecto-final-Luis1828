@@ -1,0 +1,113 @@
+.pagina-asientos{
+  padding-bottom:100px
+}
+
+.detalle-pelicula__cabecera--asientos{
+  align-items:center
+}
+.afiche--pequeno{
+  aspect-ratio:1 / 1.15;
+  width:98px;
+  border-radius:18px;
+  flex:none
+}
+
+.pantalla{
+  width:100%;
+  text-align:center;
+  margin:10px 0 18px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid var(--linea);
+  color:var(--acento-claro);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.18em;
+}
+
+.sala{
+  display:grid;
+  gap:14px
+}
+.columnas-asientos{
+  display:grid;
+  grid-template-columns:repeat(8, minmax(0,1fr));
+  gap:8px;
+  color:var(--texto-suave);
+  margin-bottom:2px;
+}
+.columna-asiento{
+  text-align:center;
+  font-size:.72rem;
+  font-weight:700;
+}
+.mapa-asientos{
+  display:grid;
+  grid-template-columns:repeat(8, minmax(0,1fr));
+  gap:8px;
+}
+.asiento{
+  border:1px solid transparent;
+  border-radius:12px;
+  background:var(--superficie-2);
+  color:#c7c1b6;
+  aspect-ratio:1 / 1;
+  font-size:.72rem;
+  padding:0;
+}
+.asiento.seleccionado{
+  background:var(--acento);
+  color:#1a1a1a;
+  font-weight:800;
+}
+.asiento.ocupado{
+  background:var(--peligro);
+  color:#fff;
+  opacity:.8;
+  cursor:not-allowed;
+}
+.leyenda{
+  display:flex;
+  justify-content:center;
+  padding:50px;
+  gap:14px;
+  flex-wrap:wrap;
+  color:var(--texto-suave);
+  font-size:.82rem;
+}
+.leyenda__opcion{display:flex;align-items:center;gap:8px}
+.leyenda__color{
+  width:12px;height:12px;border-radius:4px;background:var(--superficie-3);border:1px solid var(--linea)
+}
+.leyenda__color.seleccionado{background:var(--acento);border-color:transparent}
+.leyenda__color.ocupado{background:var(--peligro);border-color:transparent}
+
+.resumen{
+  padding:16px;
+  margin-top:16px
+}
+.resumen__bloque{
+  padding:14px;
+  background:var(--superficie-2);
+  border:1px solid var(--linea);
+  border-radius:18px;
+}
+.resumen__bloque + .resumen__bloque{margin-top:12px}
+.resumen__fila{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  color:var(--texto-suave);
+  font-size:.92rem;
+  line-height:1.45;
+}
+.resumen__fila strong,
+.resumen__fila span{color:var(--texto)}
+.resumen__texto{margin-top:8px;font-size:1rem;font-weight:700;color:var(--texto)}
+.resumen__total{margin-top:8px;font-size:1.4rem;font-weight:900;color:var(--acento)}
+
+@media (min-width: 760px){
+  .detalle-pelicula__cabecera--asientos{align-items:flex-start}
+}

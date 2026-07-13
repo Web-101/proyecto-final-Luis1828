@@ -1,0 +1,68 @@
+.titulo-pagina{
+  margin:0;
+  font-size:1.7rem;
+  line-height:1.05;
+  letter-spacing:-.03em
+}
+
+.buscador{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--superficie);
+  border:1px solid var(--linea);
+  border-radius:18px;
+  min-height:50px;
+  padding:0 14px;
+}
+.buscador--ancho{
+  margin-bottom:14px
+}
+.buscador input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--texto);
+}
+.buscador input::placeholder{
+  color:var(--texto-suave)
+}
+
+.filtros{
+  display:flex;
+  gap:10px;
+  overflow:auto;
+  padding-bottom:4px;
+  margin:8px 0 18px;
+  scrollbar-width:none;
+}
+.filtros::-webkit-scrollbar{
+  display:none
+}
+.filtros--busqueda{
+  margin-top:14px
+}
+.filtro{
+  border:1px solid var(--linea);
+  background:var(--superficie);
+  color:var(--texto);
+  padding:10px 14px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.filtro.activo{
+  background:var(--acento);
+  color:#1a1a1a;
+  border-color:transparent;
+  font-weight:800;
+}
+
+.tarjeta-busqueda{
+  padding:16px;
+}
+
+@media (min-width: 760px){
+  .titulo-pagina{font-size:2.1rem}
+  .tarjeta-busqueda .lista-peliculas{grid-template-columns:repeat(3, minmax(0,1fr))}
+}
