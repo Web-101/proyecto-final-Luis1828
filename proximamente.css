@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a1c;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 390px;
+    min-height: 100vh;
+    margin: auto;
+    background: #111216;
+}
+
+/* Encabezado */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #111216;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo img {
+    width: 28px;
+    height: 28px;
+}
+
+.logo h1 {
+    color: #ffc107;
+    font-size: 22px;
+}
+
+.notificacion {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2c2c2e;
+    border: none;
+    border-radius: 50%;
+}
+
+.notificacion img {
+    width: 19px;
+    height: 19px;
+}
+
+/* Contenido principal */
+
+main {
+    padding: 20px;
+}
+
+.subtitulo {
+    margin-bottom: 15px;
+    color: #8e8e93;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* Categorías */
+
+.categorias {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 22px;
+}
+
+.categorias a {
+    padding-bottom: 6px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.categorias .activo {
+    color: #ffc107;
+    border-bottom: 2px solid #ffc107;
+}
+
+/* Lista de películas */
+
+.peliculas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 12px;
+}
+
+.pelicula {
+    width: calc(50% - 6px);
+}
+
+.imagen-pelicula {
+    position: relative;
+}
+
+.imagen-pelicula img {
+    width: 100%;
+    height: 215px;
+    display: block;
+    object-fit: cover;
+    background: #2c2c2e;
+    border-radius: 10px;
+}
+
+.imagen-pelicula span {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 5px 7px;
+    background: #111216;
+    color: #ffc107;
+    border-radius: 10px;
+    font-size: 9px;
+}
+
+.pelicula h2 {
+    margin-top: 8px;
+    color: white;
+    font-size: 15px;
+}
+
+.anio {
+    margin-top: 4px;
+    color: #8e8e93;
+    font-size: 12px;
+}
+
+/* Membresía */
+
+.membresia {
+    margin-top: 28px;
+    padding: 20px;
+    background: #2c2c2e;
+    border-radius: 14px;
+}
+
+.oferta {
+    width: 120px;
+    padding: 5px;
+    background: #5b5547;
+    color: #ffe0a3;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 9px;
+}
+
+.membresia h2 {
+    margin: 15px 0 10px;
+    color: white;
+    font-size: 25px;
+}
+
+.descripcion-membresia {
+    color: #d0d0d0;
+    font-size: 13px;
+    line-height: 19px;
+}
+
+.membresia button {
+    margin: 16px 0;
+    padding: 11px 18px;
+    background: #ffc107;
+    color: #111216;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.imagen-palomitas {
+    width: 100%;
+    height: 210px;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Pie de página */
+
+footer {
+    margin-top: 20px;
+    background: #1a1a1c;
+    border-top: 1px solid #2c2c2e;
+}
+
+footer nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 14px 0;
+}
+
+footer nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+footer nav img {
+    width: 22px;
+    height: 22px;
+}
+
+.activo-footer {
+    color: #ffc107;
+}

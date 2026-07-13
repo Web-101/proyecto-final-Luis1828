@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1A1A1C;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 390px;
+    min-height: 100vh;
+    margin: auto;
+    background: #1A1A1C;
+}
+
+/* Encabezado */
+
+header {
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+}
+
+.logo h1 {
+    color: #FFC107;
+    font-size: 28px;
+    margin: 0;
+}
+header h1 {
+    color: #FFC107;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #8E8E93;
+    font-size: 13px;
+}
+
+/* Contenido */
+
+main {
+    padding: 0 20px 20px;
+}
+
+/* Buscador */
+
+form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #3a3a3c;
+    border-radius: 8px;
+    background: #2C2C2E;
+    color: white;
+    outline: none;
+}
+
+form input::placeholder {
+    color: #8E8E93;
+}
+
+/* Categorías */
+
+main section:nth-child(2) {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0 22px;
+}
+
+button {
+    padding: 8px 11px;
+    border: none;
+    border-radius: 15px;
+    background: #2C2C2E;
+    color: white;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+button:first-child {
+    background: #FFC107;
+    color: #1A1A1C;
+}
+
+/* Resultados */
+
+main section:nth-child(3) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+main section:nth-child(3) > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main section:nth-child(3) h2 {
+    font-size: 18px;
+}
+
+main section:nth-child(3) a {
+    color: #FFC107;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+/* Tarjetas de películas */
+
+article {
+    width: calc(50% - 7px);
+    position: relative;
+}
+
+article img {
+    width: 100%;
+    height: 190px;
+    display: block;
+    object-fit: cover;
+    background: #2C2C2E;
+    border-radius: 12px;
+}
+
+article p:first-of-type {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    padding: 4px 7px;
+    background: #1A1A1C;
+    color: #FFC107;
+    border-radius: 10px;
+    font-size: 11px;
+}
+
+article h3 {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+article p:last-child {
+    color: #8E8E93;
+    font-size: 11px;
+}
+
+/* Menú inferior */
+
+footer {
+    margin-top: 20px;
+    background: #2C2C2E;
+}
+
+footer nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+}
+
+footer nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+footer nav a:nth-child(2) {
+    color: #FFC107;
+}

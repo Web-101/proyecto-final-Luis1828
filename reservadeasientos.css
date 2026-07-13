@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a1a;
+    color: white;
+    font-family: Arial;
+}
+
+.contenedor {
+    width: 360px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 20px;
+    background: #111216;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #ffe0a3;
+    font-size: 16px;
+}
+
+header button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    font-size: 22px;
+}
+
+
+main section:first-child {
+    margin: 30px 0;
+    text-align: center;
+    color: #ccc;
+}
+
+
+main section:nth-child(2) {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+main section:nth-child(2) div {
+    height: 3px;
+    margin: 6px 0;
+    background: #444;
+}
+
+main section:nth-child(2) p {
+    width: 140px;
+    margin: 12px auto;
+    padding: 7px;
+    background: #444;
+    border-radius: 20px;
+    color: #ddd;
+}
+
+
+main section:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+main section:nth-child(3) p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+main section:nth-child(3) span {
+    width: 12px;
+    height: 12px;
+    background: #444;
+    border-radius: 3px;
+}
+
+main section:nth-child(3) p:nth-child(2) span {
+    background: #ffc107;
+}
+
+main section:nth-child(3) p:nth-child(3) span {
+    background: darkred;
+}
+
+
+main section:nth-child(4) {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 35px;
+}
+
+main section:nth-child(4) button {
+    height: 38px;
+    border: none;
+    border-radius: 6px;
+    background: #3a3a3d;
+    color: #999;
+}
+
+
+main section:nth-child(4) button:nth-child(3),
+main section:nth-child(4) button:nth-child(10),
+main section:nth-child(4) button:nth-child(11),
+main section:nth-child(4) button:nth-child(24) {
+    background: darkred;
+    color: #ddd;
+}
+
+
+main section:nth-child(5) {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px;
+    margin-bottom: 50px;
+    background: #29292c;
+    border-radius: 8px;
+}
+
+main section:nth-child(5) div:last-child {
+    text-align: right;
+}
+
+main section:nth-child(5) p {
+    margin: 5px 0;
+    color: #ddd;
+}
+
+
+main section:nth-child(6) button {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 9px;
+    background: #ffc107;
+    color: black;
+    font-size: 14px;
+}
