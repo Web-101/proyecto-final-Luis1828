@@ -4,7 +4,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
-const PUBLIC_DIR = path.join(ROOT, 'public');
+const PUBLIC_DIR = path.join(ROOT, 'docs');
 const DATA_FILE = path.join(ROOT, 'data', 'cartelera.json');
 
 const MIME_TYPES = {

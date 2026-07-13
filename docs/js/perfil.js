@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   view.innerHTML = `
     <section class="perfil">
       <div class="perfil__foto">
-        <img src="/assets/usuario.jpg" alt="Avatar de Usuario 1">
+        <img src="assets/usuario.jpg" alt="Avatar de Usuario 1">
         <button class="boton-foto" type="button" aria-label="Editar perfil">✎</button>
       </div>
       <h1>Usuario 1</h1>

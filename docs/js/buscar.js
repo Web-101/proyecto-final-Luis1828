@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     view.innerHTML = `
       <section class="tarjeta tarjeta-busqueda">
         <div class="buscador buscador--ancho">
-          <img src="/assets/search.svg" alt="" width="18" height="18">
+          <img src="assets/search.svg" alt="" width="18" height="18">
           <input id="campoBusqueda" type="search" placeholder="Buscar película...">
         </div>
 

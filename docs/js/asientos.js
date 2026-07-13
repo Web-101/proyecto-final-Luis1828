@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
 
         <div class="acciones">
-          <a class="boton boton--simple" href="/pelicula.html?id=${encodeURIComponent(movieId)}">Volver</a>
+          <a class="boton boton--simple" href="pelicula.html?id=${encodeURIComponent(movieId)}">Volver</a>
           <button id="botonContinuar" class="boton boton--principal" type="button" disabled>Continuar</button>
         </div>
       </section>

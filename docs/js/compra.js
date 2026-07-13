@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div id="cajaError" class="aviso" style="display:none"></div>
 
         <div class="acciones">
-          <a class="boton boton--simple" href="/asientos.html?movie=${encodeURIComponent(draft.movieId)}&show=${encodeURIComponent(draft.showId)}">Volver</a>
+          <a class="boton boton--simple" href="asientos.html?movie=${encodeURIComponent(draft.movieId)}&show=${encodeURIComponent(draft.showId)}">Volver</a>
           <button class="boton boton--principal" type="submit">Comprar</button>
         </div>
       </form>

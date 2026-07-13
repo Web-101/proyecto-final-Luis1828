@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <div class="acciones">
-        <a class="boton boton--principal boton--bloque" href="/index.html">Volver a cartelera</a>
-        <a class="boton boton--simple boton--bloque" href="/perfil.html">Ir a perfil</a>
+        <a class="boton boton--principal boton--bloque" href="index.html">Volver a cartelera</a>
+        <a class="boton boton--simple boton--bloque" href="perfil.html">Ir a perfil</a>
       </div>
     </section>
   `;
