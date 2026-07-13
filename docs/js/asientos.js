@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const seating = await obtenerApi(`/api/asientos/${encodeURIComponent(showId)}`);
     const volverAPelicula = document.getElementById('volverAPelicula');
-    if (volverAPelicula) volverAPelicula.href = `/pelicula.html?id=${encodeURIComponent(movieId)}`;
+    if (volverAPelicula) volverAPelicula.href = `pelicula.html?id=${encodeURIComponent(movieId)}`;
 
     const seatRows = seating.seatRows;
     const seatCols = seating.seatCols;
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         seats: [...selected],
         total: asientoTotal(),
       });
-      window.location.href = '/compra.html';
+      window.location.href = 'compra.html';
     });
 
     renderGrid();

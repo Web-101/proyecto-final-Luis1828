@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       results.innerHTML = items.map((movie) => {
-        const href = movie.showtimes ? `/pelicula.html?id=${encodeURIComponent(movie.id)}` : '/proximamente.html';
+        const href = movie.showtimes ? `pelicula.html?id=${encodeURIComponent(movie.id)}` : 'proximamente.html';
         const badge = movie.showtimes ? `⭐ ${movie.rating}` : (movie.tag || 'PRÓX');
         return tarjetaPelicula(movie, href, badge);
       }).join('');

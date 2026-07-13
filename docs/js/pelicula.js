@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           total: 0,
         });
 
-        window.location.href = `/asientos.html?movie=${encodeURIComponent(movie.id)}&show=${encodeURIComponent(selected.id)}`;
+        window.location.href = `asientos.html?movie=${encodeURIComponent(movie.id)}&show=${encodeURIComponent(selected.id)}`;
       });
     });
   } catch (error) {

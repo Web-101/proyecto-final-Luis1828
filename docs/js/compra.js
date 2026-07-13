@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const volverAAsientos = document.getElementById('volverAAsientos');
   if (volverAAsientos) {
-    volverAAsientos.href = `/asientos.html?movie=${encodeURIComponent(draft.movieId)}&show=${encodeURIComponent(draft.showId)}`;
+    volverAAsientos.href = `asientos.html?movie=${encodeURIComponent(draft.movieId)}&show=${encodeURIComponent(draft.showId)}`;
   }
 
   const total = Number(draft.total || (asientosReserva.length * (draft.price || 0)));
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ticketCode: result.ticketCode,
       });
 
-      window.location.href = '/confirmacion.html';
+      window.location.href = 'confirmacion.html';
     } catch (error) {
       cajaError.style.display = 'block';
       cajaError.innerHTML = error.details?.length

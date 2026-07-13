@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     grid.innerHTML = movies.map((movie) => {
-      return tarjetaPelicula(movie, `/pelicula.html?id=${encodeURIComponent(movie.id)}`);
+      return tarjetaPelicula(movie, `pelicula.html?id=${encodeURIComponent(movie.id)}`);
     }).join('');
   } catch (error) {
     grid.innerHTML = `<div class="aviso">${escaparHTML(error.message)}</div>`;

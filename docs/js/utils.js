@@ -1,4 +1,7 @@
 const API_BASE = '';
+const RUTA_DATOS_ESTATICOS = 'data/cartelera.json';
+
+let datosEstaticosPromesa = null;
 
 function obtenerParametros() {
   return new URLSearchParams(window.location.search);
@@ -19,6 +22,63 @@ function dinero(value) {
     currency: 'USD',
     minimumFractionDigits: 2,
   }).format(Number(value || 0));
+}
+
+function fechaActualIso() {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/La_Paz',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+
+  const get = (type) => parts.find((part) => part.type === type)?.value || '';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+
+function rutaArchivo(path) {
+  if (!path) return '';
+  if (path.startsWith('/assets/')) return path.slice(1);
+  return path;
+}
+
+function normalizarDatosEstaticos(data) {
+  const copia = JSON.parse(JSON.stringify(data || {}));
+  for (const movie of copia.movies || []) {
+    movie.poster = rutaArchivo(movie.poster);
+  }
+  for (const movie of copia.upcoming || []) {
+    movie.poster = rutaArchivo(movie.poster);
+  }
+  return copia;
+}
+
+async function cargarDatosEstaticos() {
+  if (!datosEstaticosPromesa) {
+    datosEstaticosPromesa = fetch(RUTA_DATOS_ESTATICOS)
+      .then((response) => {
+        if (!response.ok) throw new Error('No se pudo cargar la cartelera');
+        return response.json();
+      })
+      .then(normalizarDatosEstaticos);
+  }
+  return datosEstaticosPromesa;
+}
+
+function buscarPelicula(data, movieId) {
+  return (data.movies || []).find((movie) => movie.id === movieId);
+}
+
+function buscarFuncion(data, showId) {
+  for (const movie of data.movies || []) {
+    const showtime = (movie.showtimes || []).find((show) => show.id === showId);
+    if (showtime) return { movie, showtime };
+  }
+  return null;
+}
+
+function usarDatosEstaticos() {
+  return window.location.hostname.endsWith('github.io') || window.location.protocol === 'file:';
 }
 
 function guardarReserva(draft) {
@@ -86,27 +146,170 @@ function obtenerEntradasPerfil() {
 }
 
 async function obtenerApi(path) {
-  const response = await fetch(`${API_BASE}${path}`);
-  const data = await response.json();
-  if (!response.ok || data.ok === false) {
-    throw new Error(data.message || 'Error al obtener datos');
+  if (usarDatosEstaticos()) return obtenerApiEstatica(path);
+
+  try {
+    const response = await fetch(`${API_BASE}${path}`);
+    const contentType = response.headers.get('Content-Type') || '';
+    if (!contentType.includes('application/json')) {
+      return obtenerApiEstatica(path);
+    }
+
+    const data = await response.json();
+    if (!response.ok || data.ok === false) {
+      throw new Error(data.message || 'Error al obtener datos');
+    }
+    return data;
+  } catch (error) {
+    if (error.name === 'SyntaxError' || error instanceof TypeError) {
+      return obtenerApiEstatica(path);
+    }
+    throw error;
   }
-  return data;
 }
 
 async function enviarApi(path, body) {
-  const response = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  const data = await response.json();
-  if (!response.ok || data.ok === false) {
-    const error = new Error(data.message || 'Error al enviar datos');
-    error.details = data.errors || [];
+  if (usarDatosEstaticos()) return enviarApiEstatica(path, body);
+
+  try {
+    const response = await fetch(`${API_BASE}${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const contentType = response.headers.get('Content-Type') || '';
+    if (!contentType.includes('application/json')) {
+      return enviarApiEstatica(path, body);
+    }
+
+    const data = await response.json();
+    if (!response.ok || data.ok === false) {
+      const error = new Error(data.message || 'Error al enviar datos');
+      error.details = data.errors || [];
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    if (error.name === 'SyntaxError' || error instanceof TypeError) {
+      return enviarApiEstatica(path, body);
+    }
     throw error;
   }
-  return data;
+}
+
+async function obtenerApiEstatica(path) {
+  const data = await cargarDatosEstaticos();
+
+  if (path === '/api/cartelera') {
+    return {
+      ok: true,
+      today: fechaActualIso(),
+      movies: data.movies || [],
+      upcoming: data.upcoming || [],
+    };
+  }
+
+  if (path === '/api/proximamente') {
+    return {
+      ok: true,
+      upcoming: data.upcoming || [],
+    };
+  }
+
+  const movieMatch = path.match(/^\/api\/cartelera\/([^/]+)$/);
+  if (movieMatch) {
+    const movie = buscarPelicula(data, decodeURIComponent(movieMatch[1]));
+    if (!movie) throw new Error('Película no encontrada');
+    return { ok: true, movie };
+  }
+
+  const funcionesMatch = path.match(/^\/api\/funciones\/([^/]+)$/);
+  if (funcionesMatch) {
+    const movie = buscarPelicula(data, decodeURIComponent(funcionesMatch[1]));
+    if (!movie) throw new Error('Película no encontrada');
+
+    const today = fechaActualIso();
+    const showtimes = (movie.showtimes || []).filter((showtime) => showtime.date === today);
+    return {
+      ok: true,
+      movieId: movie.id,
+      title: movie.title,
+      showtimes: showtimes.length ? showtimes : (movie.showtimes || []),
+    };
+  }
+
+  const asientosMatch = path.match(/^\/api\/asientos\/([^/]+)$/);
+  if (asientosMatch) {
+    const found = buscarFuncion(data, decodeURIComponent(asientosMatch[1]));
+    if (!found) throw new Error('Función no encontrada');
+
+    const { movie, showtime } = found;
+    return {
+      ok: true,
+      movie: {
+        id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        duration: movie.duration,
+        rating: movie.rating,
+        genre: movie.genre,
+      },
+      showtime,
+      seatRows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+      seatCols: [1, 2, 3, 4, 5, 6, 7, 8],
+    };
+  }
+
+  throw new Error('Recurso no encontrado');
+}
+
+async function enviarApiEstatica(path, payload) {
+  if (path !== '/api/checkout') throw new Error('Recurso no encontrado');
+
+  const errors = [];
+  if (!payload.name || !payload.name.trim()) errors.push('El nombre es obligatorio');
+  if (!payload.email || !payload.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+    errors.push('El correo electrónico es inválido');
+  }
+  if (!payload.movieId || !payload.showId) errors.push('Falta película o función');
+  if (!Array.isArray(payload.seats) || payload.seats.length === 0) {
+    errors.push('Debes seleccionar al menos un asiento');
+  }
+
+  const data = await cargarDatosEstaticos();
+  const found = payload.showId ? buscarFuncion(data, payload.showId) : null;
+  if (!found) errors.push('La función seleccionada no existe');
+
+  if (errors.length) {
+    const error = new Error('No se pudo completar la compra');
+    error.details = errors;
+    throw error;
+  }
+
+  const ticketCode = `CP-${Date.now().toString(36).toUpperCase()}`;
+  const { movie, showtime } = found;
+  const purchase = {
+    id: ticketCode,
+    createdAt: new Date().toISOString(),
+    movieId: payload.movieId,
+    showId: payload.showId,
+    seats: payload.seats,
+    customer: {
+      name: payload.name.trim(),
+      email: payload.email.trim(),
+      phone: (payload.phone || '').trim(),
+    },
+    total: Number(payload.total || 0),
+    movieTitle: movie.title,
+    poster: movie.poster,
+    showtime,
+  };
+
+  return {
+    ok: true,
+    ticketCode,
+    purchase,
+  };
 }
 
 function pintarNavegacionInferior(active) {
