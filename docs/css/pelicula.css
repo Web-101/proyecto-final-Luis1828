@@ -1,0 +1,57 @@
+.detalle-pelicula{
+  padding:16px
+}
+.detalle-pelicula__cabecera{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
+.detalle-pelicula__texto{
+  min-width:0
+}
+.detalle-pelicula__texto h1{
+  margin:6px 0 0;
+  font-size:1.45rem;
+  line-height:1.1
+}
+.detalle-pelicula__datos{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.synopsis{
+  margin:12px 0 0;
+  color:var(--texto-suave);
+  line-height:1.6
+}
+
+.horarios{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+.boton-horario{
+  width:100%;
+  border:1px solid var(--linea);
+  background:var(--superficie-2);
+  color:var(--texto);
+  border-radius:18px;
+  padding:14px 15px;
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.boton-horario strong{
+  font-size:1rem
+}
+.boton-horario span{
+  color:var(--texto-suave);
+  font-size:.85rem
+}
+
+@media (min-width: 760px){
+  .detalle-pelicula__cabecera{align-items:center}
+  .detalle-pelicula__texto h1{font-size:1.9rem}
+}
